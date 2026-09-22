@@ -108,7 +108,10 @@ def process_data(data):
 
         for i, photo in enumerate(photos, start=1):
             url = photo.get("fullSizeUrl")
-            filename = f"{date_str}-{i:02d}.jpg"
+            if photo.get("mediaType") == "video":
+                filename = f"{date_str}-{i:02d}.mp4"
+            else:
+                filename = f"{date_str}-{i:02d}.jpg"
             filepath = os.path.join(DOWNLOAD_DIR, filename)
             download_photo(url, filepath)
 
